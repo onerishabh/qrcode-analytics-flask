@@ -1,0 +1,14 @@
+__pycache__/
+.classpath.txt
+target
+.classpath
+.project
+.idea
+.settings
+.vscode
+*.iml
+venv/
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
