@@ -1,5 +1,7 @@
 package com.myorg;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import software.constructs.Construct;
 import software.amazon.awscdk.Stack;
@@ -10,7 +12,6 @@ import software.amazon.awscdk.services.ecs.ContainerDefinitionOptions;
 import software.amazon.awscdk.services.ecs.ContainerImage;
 import software.amazon.awscdk.services.ecs.FargateService;
 import software.amazon.awscdk.services.ecs.PortMapping;
-import software.amazon.awscdk.CfnOutput;
 
 public class QRCodeFlaskServerStack extends Stack {
     public QRCodeFlaskServerStack(final Construct scope, final String id) {
@@ -29,9 +30,15 @@ public class QRCodeFlaskServerStack extends Stack {
                     .containerPort(5000)
                     .hostPort(5000)
                     .build();
+
+        Map<String, String> hm = new HashMap<String, String>();
+        hm.put("AWS_DEFAULT_REGION", "us-east-1");
+        hm.put("AWS_ACCESS_KEY_ID", "<access-key-value>");
+        hm.put("AWS_SECRET_ACCESS_KEY", "<secret-access-key-value>");
             
         task_def.addContainer("QRCode", ContainerDefinitionOptions.builder()
                     .image(ContainerImage.fromAsset("../server"))
+                    .environment(hm)
                     .portMappings(Arrays.asList(pm))
                     .build());
 
