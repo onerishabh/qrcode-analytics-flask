@@ -10,11 +10,11 @@ public class InfrastructureApp {
     public static void main(final String[] args) {
         App app = new App();
 
-        new InfrastructureStack(app, "InfrastructureStack", StackProps.builder()
+        InfrastructureStack infraStack = new InfrastructureStack(app, "InfrastructureStack", StackProps.builder()
                 .build());
         
         new QRCodeFlaskServerStack(app, "QRCodeFlaskServerStack", StackProps.builder()
-                .build());
+                .build(), infraStack.app_sm.getSecretArn());
 
         app.synth();
     }
