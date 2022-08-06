@@ -61,10 +61,8 @@ public class QRCodeFlaskServerStack extends Stack {
                     .desiredCount(1)
                     .build();
         
-        String dns = task_def.getNetworkMode().toString();
-        
-        CfnOutput.Builder.create(this, "LINK")
-                .value(dns)
+        CfnOutput.Builder.create(this, "TaskDefARN")
+                .value(ecs_fargate.getTaskDefinition().getTaskDefinitionArn())
                 .build();
     }
     private String get_static_salt(){
