@@ -8,7 +8,7 @@ import os
 
 
 def get_static_salt():
-    static_salt = os.environ.get["STATIC_SALT"]
+    static_salt = os.environ.get("STATIC_SALT")
     return static_salt
 
 def add_dynamic_salt(salt: str, email: str):
