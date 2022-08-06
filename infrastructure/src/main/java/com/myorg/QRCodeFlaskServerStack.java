@@ -15,6 +15,7 @@ import software.amazon.awscdk.services.ecs.PortMapping;
 import software.amazon.awscdk.services.ec2.SecurityGroup;
 import software.amazon.awscdk.services.ec2.Peer;
 import software.amazon.awscdk.services.ec2.Port;
+import java.util.UUID;
 
 public class QRCodeFlaskServerStack extends Stack {
     public QRCodeFlaskServerStack(final Construct scope, final String id) {
@@ -39,6 +40,7 @@ public class QRCodeFlaskServerStack extends Stack {
         hm.put("AWS_ACCESS_KEY_ID",  System.getenv("AWS_ACCESS_KEY_ID"));
         hm.put("AWS_SECRET_ACCESS_KEY",  System.getenv("AWS_SECRET_ACCESS_KEY"));
         hm.put("SECRETS_MANAGER", secret_arn);
+        hm.put("STATIC_SALT", get_static_salt());
             
         task_def.addContainer("QRCode", ContainerDefinitionOptions.builder()
                     .image(ContainerImage.fromAsset("../server"))
@@ -58,5 +60,9 @@ public class QRCodeFlaskServerStack extends Stack {
                     .desiredCount(1)
                     .build();
         
+    }
+    private String get_static_salt(){
+        String salt = UUID.randomUUID().toString();
+        return salt;
     }
 }

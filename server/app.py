@@ -3,6 +3,7 @@ from flask import Flask, request, send_file, redirect, session
 import qrcode as qr
 import src.qrcode as qrcode
 import src.customer as customer
+import os
 
 app = Flask(__name__)
 
@@ -15,7 +16,8 @@ def serve_pil_image(pil_img):
 def hello():
     if "email" in session:
         return f"<h1>Hello, {session['email']}</h1>"
-    return '<h1>Hello, World!</h1>'
+    salt=os.environ.get("STATIC_SALT")
+    return f'<h1>Hello, World! {salt}</h1>'
 
 def qr_code():
     if "email" not in session:
