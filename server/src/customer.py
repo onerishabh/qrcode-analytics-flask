@@ -1,6 +1,4 @@
-from audioop import add
 from datetime import datetime
-from urllib import response
 import uuid
 import hashlib
 import boto3
