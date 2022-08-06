@@ -15,6 +15,7 @@ import software.amazon.awscdk.services.ecs.PortMapping;
 import software.amazon.awscdk.services.ec2.SecurityGroup;
 import software.amazon.awscdk.services.ec2.Peer;
 import software.amazon.awscdk.services.ec2.Port;
+import software.amazon.awscdk.CfnOutput;
 import java.util.UUID;
 
 public class QRCodeFlaskServerStack extends Stack {
@@ -60,6 +61,11 @@ public class QRCodeFlaskServerStack extends Stack {
                     .desiredCount(1)
                     .build();
         
+        String dns = task_def.getNetworkMode().toString();
+        
+        CfnOutput.Builder.create(this, "LINK")
+                .value(dns)
+                .build();
     }
     private String get_static_salt(){
         String salt = UUID.randomUUID().toString();
