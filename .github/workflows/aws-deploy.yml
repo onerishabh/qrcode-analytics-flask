@@ -1,0 +1,45 @@
+on:
+  push:
+    branches:
+      - main
+    workflow_dispatch:
+
+jobs:
+  qrcode_deploy:
+    runs-on: "ubuntu-20.04"
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+      iac-dir: ./infrastructure
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node and NPM
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.15.1"
+    
+      - name : AWS Configure
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: "us-east-1"
+      
+      - name: Install AWS CDK
+        run: npm i aws-cdk
+        working-directory: ${{ env.iac-dir }}
+      
+      - name: CDK bootstrap
+        run: yarn cdk bootstrap
+        working-directory: ${{ env.iac-dir }}
+
+      - name: Deploy Application Platform
+        run: yarn cdk deploy InfrastructureStack --require-approval never
+        working-directory: ${{ env.iac-dir }}
+      
+      - name: Deploy Application Flask Server
+        run: yarn cdk deploy QRCodeFlaskServerStack --require-approval never
+        working-directory: ${{ env.iac-dir }}
