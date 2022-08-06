@@ -2,8 +2,6 @@
 
 FROM python:3.8-slim-buster
 
-RUN export SECRETS_MANAGER=$(aws cloudformation describe-stacks --stack-name InfrastructureStack --query "Stacks[?StackName=='InfrastructureStack'][].Outputs[?OutputKey=='QRCodeSMOP'].OutputValue" --no-paginate --output text)
-
 WORKDIR /python-docker
 
 COPY requirements.txt requirements.txt
