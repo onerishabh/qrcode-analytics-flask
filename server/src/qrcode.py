@@ -2,6 +2,7 @@ import uuid
 import csv
 import boto3
 from datetime import datetime
+import os
 
 
 def store_id(id: str, target_url: str, email: str):
@@ -20,8 +21,9 @@ def store_id(id: str, target_url: str, email: str):
 def create_short_url(target_url: str, email: str):
     id = str(uuid.uuid4())[0:8]
     store_id(id, target_url, email)
+    domain = os.environ.get("APP_DOMAIN")
 
-    url = f"""http://3.89.207.185:5000/short/{id}"""
+    url = f"""http://{domain}:5000/short/{id}"""
     return url
 
 def get_target_url(id: str):
