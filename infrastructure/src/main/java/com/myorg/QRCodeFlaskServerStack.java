@@ -12,6 +12,9 @@ import software.amazon.awscdk.services.ecs.ContainerDefinitionOptions;
 import software.amazon.awscdk.services.ecs.ContainerImage;
 import software.amazon.awscdk.services.ecs.FargateService;
 import software.amazon.awscdk.services.ecs.PortMapping;
+import software.amazon.awscdk.services.ec2.SecurityGroup;
+import software.amazon.awscdk.services.ec2.Peer;
+import software.amazon.awscdk.services.ec2.Port;
 
 public class QRCodeFlaskServerStack extends Stack {
     public QRCodeFlaskServerStack(final Construct scope, final String id) {
@@ -43,8 +46,13 @@ public class QRCodeFlaskServerStack extends Stack {
                     .portMappings(Arrays.asList(pm))
                     .build());
 
+        final SecurityGroup sg = SecurityGroup.Builder.create(this, "ECSTaskSG")
+                    .allowAllOutbound(true)
+                    .build();
+        sg.addIngressRule(Peer.anyIpv4(), Port.tcp(5000));
         final FargateService ecs_fargate = FargateService.Builder.create(this, "QRCodeService")
                     .cluster(ecs_cluster)
+                    .securityGroups(Arrays.asList(sg))
                     .taskDefinition(task_def).assignPublicIp(true)
                     .desiredCount(1)
                     .build();
