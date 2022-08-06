@@ -10,6 +10,8 @@ import software.amazon.awscdk.services.secretsmanager.Secret;
 import software.amazon.awscdk.CfnOutput;
 
 public class InfrastructureStack extends Stack {
+    public final Secret app_sm;
+
     public InfrastructureStack(final Construct scope, final String id) {
         this(scope, id, null);
     }
@@ -39,6 +41,7 @@ public class InfrastructureStack extends Stack {
 
         final Secret qrcode_secrets = Secret.Builder.create(this, "QRCodeSM")
                 .build();
+        this.app_sm = qrcode_secrets;
         
         CfnOutput.Builder.create(this, "QRCodeSMOP")
                 .value(qrcode_secrets.getSecretArn())
