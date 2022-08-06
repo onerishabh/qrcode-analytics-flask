@@ -15,10 +15,10 @@ import software.amazon.awscdk.services.ecs.PortMapping;
 
 public class QRCodeFlaskServerStack extends Stack {
     public QRCodeFlaskServerStack(final Construct scope, final String id) {
-        this(scope, id, null);
+        this(scope, id, null, null);
     }
 
-    public QRCodeFlaskServerStack(final Construct scope, final String id, final StackProps props) {
+    public QRCodeFlaskServerStack(final Construct scope, final String id, final StackProps props, String secret_arn) {
         super(scope, id, props);
 
         final Cluster ecs_cluster = Cluster.Builder.create(this, "ClusterService")
@@ -33,8 +33,9 @@ public class QRCodeFlaskServerStack extends Stack {
 
         Map<String, String> hm = new HashMap<String, String>();
         hm.put("AWS_DEFAULT_REGION", "us-east-1");
-        hm.put("AWS_ACCESS_KEY_ID", "<access-key-value>");
-        hm.put("AWS_SECRET_ACCESS_KEY", "<secret-access-key-value>");
+        hm.put("AWS_ACCESS_KEY_ID",  System.getenv("AWS_ACCESS_KEY_ID"));
+        hm.put("AWS_SECRET_ACCESS_KEY",  System.getenv("AWS_SECRET_ACCESS_KEY"));
+        hm.put("SECRETS_MANAGER", secret_arn);
             
         task_def.addContainer("QRCode", ContainerDefinitionOptions.builder()
                     .image(ContainerImage.fromAsset("../server"))
