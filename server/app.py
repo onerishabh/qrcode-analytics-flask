@@ -18,11 +18,10 @@ def serve_pil_image(pil_img):
 def hello():
     if "email" in session:
         return f"<h1>Hello, {session['email']}</h1>"
-    set_domain()
+    
     if flag == -1:
-        domain = os.environ.get('APP_DOMAIN')
-        flag = 0
-    return f'<h1>Hello, World! {domain}</h1>'
+        set_domain()
+    return f'<h1>Hello, World!</h1>'
 
 def qr_code():
     if "email" not in session:
