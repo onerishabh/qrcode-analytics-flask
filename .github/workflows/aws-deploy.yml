@@ -43,3 +43,7 @@ jobs:
       - name: Deploy Application Flask Server
         run: yarn cdk deploy QRCodeFlaskServerStack --require-approval never
         working-directory: ${{ env.iac-dir }}
+      
+      - name: Get Public IP
+        run: python get_public_ip.py
+        working-directory: ${{ env.iac-dir }}
