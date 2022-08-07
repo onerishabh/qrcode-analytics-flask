@@ -18,6 +18,7 @@ def serve_pil_image(pil_img):
 def hello():
     if "email" in session:
         return f"<h1>Hello, {session['email']}</h1>"
+    set_domain()
     domain = os.environ.get('APP_DOMAIN')
     return f'<h1>Hello, World! {domain}</h1>'
 
@@ -80,7 +81,7 @@ app.add_url_rule("/short/<string:id>", "redirect_func", redirect_func)
 app.secret_key = ".."
 
 print("STARTING SERVER^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-set_domain()
+# set_domain()
 
 if __name__ == "__main__":
     app.debug = True
