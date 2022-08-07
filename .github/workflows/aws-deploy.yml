@@ -45,5 +45,5 @@ jobs:
         working-directory: ${{ env.iac-dir }}
       
       - name: Get Public IP
-        run: python get_public_ip.py
+        run: pip install boto3 && python get_public_ip.py
         working-directory: ${{ env.iac-dir }}
