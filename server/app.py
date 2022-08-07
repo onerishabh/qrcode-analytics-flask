@@ -63,7 +63,6 @@ def authUser():
     return "User Not Authenticated"
 
 def set_domain():
-    print("SETTING DOMAIN NAMEEEEE ^^^^^^^^^^^^^^^^^^")
     client = boto3.client('secretsmanager')
     response = client.get_secret_value(SecretId=os.environ.get("SECRETS_MANAGER"))
 
