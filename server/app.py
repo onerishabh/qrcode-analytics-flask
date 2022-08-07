@@ -19,7 +19,9 @@ def hello():
     if "email" in session:
         return f"<h1>Hello, {session['email']}</h1>"
     set_domain()
-    domain = os.environ.get('APP_DOMAIN')
+    if flag == -1:
+        domain = os.environ.get('APP_DOMAIN')
+        flag = 0
     return f'<h1>Hello, World! {domain}</h1>'
 
 def qr_code():
@@ -79,9 +81,7 @@ app.add_url_rule("/registerUser", "registerUser", registerUser)
 app.add_url_rule("/authUser", "authUser", authUser)
 app.add_url_rule("/short/<string:id>", "redirect_func", redirect_func)
 app.secret_key = ".."
-
-print("STARTING SERVER^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-# set_domain()
+flag = -1
 
 if __name__ == "__main__":
     app.debug = True
