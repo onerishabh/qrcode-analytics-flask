@@ -4,6 +4,18 @@
 
 This is a flask app that lets user download QR Code for a given `targetURL`. This application helps user get analytics on when their QR Codes were scanned, device from which QR Code was scanned, location of scanning. Users can maintain as many QR Codes in the application as they want.
 
+# Application Demo
+
+![Application Demo](./.github/images/app_demo.gif)
+
+# Application Overview
+
+![Application Overview](./.github/images/qrcodeappoverview.png)
+
+# Application Backend Overview
+
+![Application Backedn Overview](./.github/images/appinfraoverview.png)
+
 # API Documentation
 
 ## Add User
