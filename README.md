@@ -45,6 +45,8 @@ https://{public-ip-address}:5000/qrcode/{url-to-be-qrcodeified}
 Application generated QR Code points to `https://{public-ip-address}:5000/short/{qr-code-id}` which redirects to target 
 
 # GitHub Actions / CI CD Pipline
+This application can be deployed to production using just one click on `GitHub Actions`.
+ 
 Make sure, `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` are created/updated with valid credentials.
 
 Go to Actions>> .github/workflows/aws-deploy.yml >> Run Workflow
