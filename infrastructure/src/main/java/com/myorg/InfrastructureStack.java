@@ -21,12 +21,12 @@ public class InfrastructureStack extends Stack {
 
         final Table qr_code_table = Table.Builder.create(this, "QRCodeTable")
                 .tableName("QRCodeTable")
-                .partitionKey(getPartitionKey("qrcode_id"))
+                .partitionKey(getPartitionKey("email"))
                 .build();
         
         final Table invocation_table = Table.Builder.create(this, "InvocationTable")
                 .tableName("InvocationTable")
-                .partitionKey(getPartitionKey("invocation_id"))
+                .partitionKey(getPartitionKey("qrcode_id"))
                 .build();
         
         final Table user_table = Table.Builder.create(this, "UserTable")
