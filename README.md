@@ -11,6 +11,7 @@ This is a flask app that lets user download QR Code for a given `targetURL`. Thi
 4. [API Documentation](#api-documentation)
 5. [GitHub Actions / CI CD Pipline](#github-actions--ci-cd-pipline)
 6. [Infrastructure-as-Code](#infrastructure-as-code)
+8. [Release History](#release-history)
 7. [Future Plans/Improvements](#future-plansimprovements)
 
 # Application Demo
@@ -56,8 +57,10 @@ The entire application has two `AWS Cloudformation` stacks: `InfrastructureStack
 
 This `cdk` application is a `Java` based. Make sure `node`, `aws-cdk`, `aws-cli`, `java`, `mvn` are installed on software release machine. 
 
+# Release History
+1. [v1.0.0](https://github.com/onerishabh/qrcode-analytics-flask/releases/tag/v1.0.0) - 8th August, 2022
+
 # Future Plans/Improvements
 - [ ] Add better front-end to interact with the application. 
 - [ ] Integrate `stripe payment gateway` to the application. 
 - [ ] Write test cases to acheive 100% `coverage`. 
- 
