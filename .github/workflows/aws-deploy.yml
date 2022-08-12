@@ -47,3 +47,7 @@ jobs:
       - name: Get Public IP
         run: pip install boto3 && python get_public_ip.py
         working-directory: ${{ env.iac-dir }}
+      
+      - name: QRCode Application Backend Test
+        run: yarn mvn compile && yarn mvn test
+        working-directory: ${{ env.iac-dir }}
