@@ -32,6 +32,12 @@ jobs:
         run: npm i aws-cdk
         working-directory: ${{ env.iac-dir }}
       
+      - name: Set up JDK 14
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+
+      
       - name: CDK bootstrap
         run: yarn cdk bootstrap
         working-directory: ${{ env.iac-dir }}
@@ -49,5 +55,5 @@ jobs:
         working-directory: ${{ env.iac-dir }}
       
       - name: QRCode Application Backend Test
-        run: yarn mvn compile && yarn mvn test
+        run: mvn compile && mvn test
         working-directory: ${{ env.iac-dir }}
