@@ -35,7 +35,6 @@ public class InfrastructureTest {
         put("TableName", "DynamicSaltTable");
         }});
 
-        template.resourceCountIs("AWS::SecretsManager::Secret", 1);
     }
 
     @Test
