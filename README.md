@@ -64,3 +64,5 @@ This `cdk` application is a `Java` based. Make sure `node`, `aws-cdk`, `aws-cli`
 - [ ] Add better front-end to interact with the application. 
 - [ ] Integrate `stripe payment gateway` to the application. 
 - [ ] Write test cases to acheive 100% `coverage`. 
+- [ ] Add test case to check docker image hashes between `GitHub` and `AWS ECR`.
+- [ ] Add test case to check `QRCodeFlaskServerStack`. Currently failing due to inter-stack parameter passing. Need to read more into `AWS CDK` testing. 
