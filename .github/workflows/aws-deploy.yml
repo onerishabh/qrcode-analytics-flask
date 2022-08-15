@@ -40,22 +40,22 @@ jobs:
       - name: CDK bootstrap
         run: yarn cdk bootstrap
         working-directory: ${{ env.iac-dir }}
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
 
       - name: Deploy Application Platform
         run: yarn cdk deploy InfrastructureStack --require-approval never
         working-directory: ${{ env.iac-dir }}
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
 
       - name: Deploy Application Flask Server
         run: yarn cdk deploy QRCodeFlaskServerStack --require-approval never
         working-directory: ${{ env.iac-dir }}
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
 
       - name: Get Public IP
         run: pip install boto3 && python get_public_ip.py
         working-directory: ${{ env.iac-dir }}
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
 
       - name: QRCode Application Backend Test
         run: mvn compile && mvn test
